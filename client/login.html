@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- google-signin script -->
+  <meta name="google-signin-client_id" content="802031697502-vau7kg8dve1smj130nk3b9tv5tshb9t1.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <title>Document</title>
+
+  <!-- bootstrap style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <!-- form login -->
+        <div class="card" id="container-form-login">
+          <div class="card-body">
+            <h4 class="card-title">Login</h4>
+            <hr>
+            <form id="form-login">
+              <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" class="form-control" id="login-email">
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" class="form-control" id="login-password">
+              </div>
+              <button type="submit" class="btn btn-success btn-block mt-4">Login</button>
+
+              <p>Your also can login using google account</p>
+              <!-- google-signin button -->
+              <div class="g-signin2" data-onsuccess="handleGoogleSignin"></div>
+              <!-- logout -->
+              <a href="#" onclick="handleClickLogout()">Sign out</a>
+
+            </form>
+          </div>
+        </div>
+        <!-- end of form login -->
+      </div>
+    </div>
+  </div>
+  <!-- axios script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+  <!-- jquery script -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <!-- bootstrap script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    $('document').ready(function () {
+
+      $('#form-login').submit(handleSubmitLogin)
+
+    })
+
+    function saveLogin (data) {
+      console.log('signed-in')
+      console.log(data)
+      localStorage.setItem('PetMe_user', JSON.stringify(data.user))
+      localStorage.setItem('PetMe_token', data.token)
+    }
+
+    function handleSubmitLogin (e) {
+      e.preventDefault()
+
+      let email = $('#login-email').val()
+      let password = $('#login-password').val()
+
+      axios
+        .post('http://localhost:3000/auth/login', {
+          email,
+          password
+        })
+        .then(({ data }) => {
+          saveLogin(data)
+        })
+        .catch(err => console.log(err))
+    }
+
+    function handleGoogleSignin (googleUser) {
+      let token = googleUser.getAuthResponse().id_token
+
+      axios
+        .post('http://localhost:3000/auth/google-signin', { token })
+        .then(({ data }) => {
+          saveLogin(data)
+        })
+        .catch(err => console.log(err))
+    }
+
+    function handleClickLogout () {
+      let auth2 = gapi.auth2.getAuthInstance()
+
+      auth2.signOut().then(function () {
+        console.log('signed-out')
+        localStorage.removeItem('PetMe_user')
+        localStorage.removeItem('PetMe_token')
+      })
+    }
+  </script>
+</body>
+</html>
