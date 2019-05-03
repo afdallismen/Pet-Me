@@ -70,6 +70,7 @@ function getPetDetail(data) {
     $('.detail-about').append('Phone: ' + data.contact.phone + '<br>')
     $('.detail-about').append('Address: ' + data.contact.address + '<br>')
 }
+
 function sendRequestPost(query) {
     $.ajax({
         url: 'http://localhost:3000/animals',
