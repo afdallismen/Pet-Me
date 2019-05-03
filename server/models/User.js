@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  wishes: [ Number ]
+  wishes: [ String ]
 })
 
 userSchema.pre('save', function () {

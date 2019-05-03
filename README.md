@@ -35,7 +35,8 @@
     user: {
         _id: String,
         name: String,
-        email: String
+        email: String,
+        wishes: [ String ]
     }
 }
 ```
@@ -79,7 +80,8 @@
     user: {
         _id: String,
         name: String,
-        email: String
+        email: String,
+        wishes: [ String ]
     },
     token: String
 }
@@ -94,3 +96,82 @@
 {
     message: "Internal Server Error"
 }
+```
+
+
+#### Add wish
+
+**Method**: `PUT`
+
+**URL**: `/wishes`
+
+**Request Body**:
+```javascript
+{
+    pet_id: String
+}
+```
+
+**Response Success**
+
+**Status**: `200`
+
+**Body**:
+```javascript
+{
+    user: {
+        _id: String,
+        name: String,
+        email: String,
+        wishes: [ String ]
+    }
+}
+```
+
+**Response Failure**
+
+**Status**: `500`
+
+**Body**:
+```javascript
+{
+    message: "Internal Server Error"
+}
+```
+
+
+
+#### Remove Wish
+
+<hr>
+
+**Method**: `DELETE`
+
+**URL**: `/wishes/:pet_id`
+
+**Response Success**
+
+**Status**: `200`
+
+**Body**:
+```javascript
+{
+    user: {
+        _id: String,
+        name: String,
+        email: String,
+        wishes: [ String ]
+    }
+}
+```
+
+**Response Failure**
+
+**Status**: `500`
+
+**Body**:
+```javascript
+{
+    message: "Internal Server Error"
+}
+```

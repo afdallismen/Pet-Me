@@ -52,7 +52,7 @@
       let pet_id = $(this).data('id')
 
       axios
-        .delete(`/wishes/${pet_id}`, {
+        .delete(`http://localhost:300/wishes/${pet_id}`, {
           Authorization: localStorage.getItem('PetMe_token')
         })
         .then(user => {
