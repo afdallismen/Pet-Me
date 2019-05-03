@@ -50,7 +50,7 @@ function showAnimalData(data) {
             <div class="px-2 cardview-name overflow-hidden">
                 ${pet[i].name}
             </div >
-            <div class="px-2 f-10">
+            <div class="px-2 f-10 cardview-detail">
                 ${pet[i].gender}, ${pet[i].breeds.primary}
             </div>
             <div class="px-2 flex flex-end">
@@ -84,7 +84,7 @@ function getPetDetail(id) {
         openDetail()
 
         $('.detail-name').text(`${details.name}`)
-        $('.detail-description').text(`${details.age} . ${details.gender} . ${details.size}`)
+        $('.detail-description').text(`${details.breeds.primary} . ${details.age} . ${details.gender} . ${details.size}`)
         $('.detail-image').attr('src', details.photos[0].medium)
 
         $('.detail-about').empty()
