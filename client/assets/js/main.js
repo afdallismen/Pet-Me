@@ -26,25 +26,25 @@ function handleClickWishesLink (e) {
 
 function getAnimalData() {
     $.ajax({
-        url:'http://localhost:3000/animals/',
+        url: 'http://localhost:3000/animals/',
         method: 'GET',
         data: {
             limit: 20,
             type: 'Dog'
         }
     })
-    .done(response => {
-        showAnimalData(response)
-    })
-    .catch((jqXHR, textStatus) => {
-        console.log(jqXHR)
-    })
+        .done(response => {
+            showAnimalData(response)
+        })
+        .catch((jqXHR, textStatus) => {
+            console.log(jqXHR)
+        })
 
 }
 
 function showAnimalData(data) {
-   let pet = data.animals
-    for(let i = 0; i < pet.length; i++) {
+    let pet = data.animals
+    for (let i = 0; i < pet.length; i++) {
         // console.log(pet[i].name)
         // console.log(pet[i].age, pet[i].gender)
         // console.log(pet[i].colors.primary);
@@ -135,8 +135,8 @@ function getPetDetail(id) {
         method: 'GET',
         url: 'http://localhost:3000/animals/' + id
     })
-    .done(response => {
-        let details = response.animal
+        .done(response => {
+            let details = response.animal
 
         openDetail()
 
@@ -160,11 +160,43 @@ function getPetDetail(id) {
             `<h5>Address</h5>
             <p>${details.contact.address.address1}</p>
         `)
+        populateWiki(details.breeds.primary)
     })
     .fail((jqXHR, textStatus) => {
         console.log(jqXHR)
-    })
+    })}
+
+function populateWiki(query) {
+    if (query) {
+        $.ajax({
+            method: 'GET',
+            url: `http://localhost:3000/details/${query+' '+'pet'}`
+        })
+            .done(response => {
+                $('#wikiSearch').html('')
+                response.forEach(entry => {
+                    $('#wikiSearch').append(`
+                  <div class="col-4">
+                        <div class="card" >
+                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                            <div class="card-body">
+                            <h5 class="card-title">${entry.title}</h5>
+                            <p class="card-text text-overflow">${entry.text}</p>
+                        <a href="https://en.wikipedia.org/?curid=${entry.pageid}" class="btn btn-primary">see wikipedia</a>
+                        </div>
+                    </div>
+                    </div>
+                  `)
+                })
+            })
+            .fail((jqXHR, textStatus) => {
+                $('#wikiSearch').html('')
+            })
+
+    }
 }
+
+
 function sendRequestPost(query) {
     console.log(query)
     $.ajax({
@@ -172,17 +204,16 @@ function sendRequestPost(query) {
         method: 'GET',
         data: query
     })
-    .done(response => {
-        console.log(response)
-        $('.cardview-container').empty()
-        showAnimalData(response)
-    })
-    .fail((jqXHR, textStatus) => {
-        console.log('fail request')
-    })
+        .done(response => {
+            $('.cardview-container').empty()
+            showAnimalData(response)
+        })
+        .fail((jqXHR, textStatus) => {
+            console.log('fail request')
+        })
 }
 
-function searchByBreed(){
+function searchByBreed() {
     // console.log('haha')
     // console.log($('#search-input').val())
     // console.log($('.search-breed').val())
@@ -198,10 +229,10 @@ function advanceSearchPet() {
     // console.log($('.search-size').val())
     closeDetail()
     let query = {}
-    if($('.search-breed').val() !== "") query.breed = $('.search-breed').val()
-    if($('.search-type').val() !== "") query.type = $('.search-type').val()
-    if($('.search-gender').val() !== "") query.gender = $('.search-gender').val()
-    if($('.search-size').val() !== "") query.size = $('.search-size').val()
+    if ($('.search-breed').val() !== "") query.breed = $('.search-breed').val()
+    if ($('.search-type').val() !== "") query.type = $('.search-type').val()
+    if ($('.search-gender').val() !== "") query.gender = $('.search-gender').val()
+    if ($('.search-size').val() !== "") query.size = $('.search-size').val()
 
     sendRequestPost(query)
 }

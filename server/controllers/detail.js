@@ -17,10 +17,6 @@ const functions = {
 
             })
             .then(searchResult => {
-                // console.log(result.data.parse)
-                // let parsed = result.data.parse.text['*']
-                // let diss =$(`.mw-parser-output`,parsed).get()
-                // res.json({parsed})
                 let searched = searchResult.data.query.search
                     .slice(0, 3)
                     .map(el => el.pageid)
@@ -34,19 +30,26 @@ const functions = {
                 console.log(contents.length, contents.map(c => c.status).join())
                 let cleaned = contents.map(c => c.data.parse)
                 cleaned.forEach(data => {
-                //     // console.log(typeof data.text)
-                //     // data.processed  = []
-                    
+                    //     // console.log(typeof data.text)
+                    //     // data.processed  = []
+
                     let texts = ($('div.mw-parser-output > p', data.text['*']).text())
-                                        
-                //     // .each((i,el)=>{
-                //     //     console.log(`~~~~~~~~`)
-                //     //     console.log(el)
-                //     //     console.log(`~~~~~~~~`)
-                //     // })
-                //     // console.log(Object.keys($('div.mw-parser-output > p', data.text['*'])))
+
+                    //     // .each((i,el)=>{
+                    //     //     console.log(`~~~~~~~~`)
+                    //     //     console.log(el)
+                    //     //     console.log(`~~~~~~~~`)
+                    //     // })
+                    //     // console.log(Object.keys($('div.mw-parser-output > p', data.text['*'])))
                     data.text = h2p(texts)
+                    data.textLength = data.text.length
                 })
+
+                // let filtered = cleaned.filter(data => data.textLength > 30 && data.textLength < 100)
+                // console.log(filtered.length)
+                // if (filtered.length == 0) filtered = [cleaned[0]]
+                // console.log(filtered.length)
+                // res.json(filtered)
                 res.json(cleaned)
             })
             .catch(error => res.status(500).json(error))

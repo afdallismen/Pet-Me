@@ -12,7 +12,10 @@ const PORT = 3000
 
 mongoose.connect('mongodb://localhost:27017/petme', { useNewUrlParser: true })
 
+<<<<<<< HEAD
 // mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+=======
+>>>>>>> wiki trivia frontend
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
