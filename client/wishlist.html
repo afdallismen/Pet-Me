@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- bootstrap style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+
+  <title>Document</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row" id="container-wishes"></div>
+  </div>
+
+  <!-- axios script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+  <!-- jquery script -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <!-- bootstrap script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    function wishItem (wish) {
+      return `
+      <div class="col-4">
+        <div class="card">
+          <div class="control" style="position: absolute; top: 0; right: 0;">
+            <button class="btn btn-info px-1 py-0 delete-wish" data-id="${wish.pet.id}">
+              <i class="fa fa-close"></i>
+            </button>
+          </div>
+          <img src="http://picsum.photos/30" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">${wish.pet.name}</h5>
+            <p class="card-text">${wish.pet.description}</p>
+            <a class="btn btn-primary" href="#">Go Somewhere</a>
+          </div>
+        </div>
+      </div>
+      `
+    }
+
+    function handleClickDeleteWish (e) {
+      e.preventDefault()
+
+      let pet_id = $(this).data('id')
+
+      axios
+        .delete(`/wishes/${pet_id}`, {
+          Authorization: localStorage.getItem('PetMe_token')
+        })
+        .then(user => {
+          renderWishlist(user.wishes)
+        })
+        .catch(err => console.log(err))
+    }
+
+    function renderWishlist (wishes) {
+      // wishes is array of pet id
+      $('#container-wishes').html('')
+      Promise.all(
+        wishes.map(
+          pet_id => axios
+            .get(`https://api.petfinder.com/v2/animals/${pet_id}`) // need authorization
+            .then(({ data }) => data)
+        )
+      ).then(pets => {
+        pets.forEach(pet => {
+          $('#container-wishes').append(wishItem(pet))
+        })
+        $('.delete-wish').click(handleClickDeleteWish)
+      })
+      .catch(err => console.log(err))
+    }
+
+    $('document').ready(function () {
+      // let dummy_wishes = [
+      //   {
+      //     pet: {
+      //       id: 1234,
+      //       name: 'Cillum excepteur tempor',
+      //       description: "Est ut pariatur id tempor laboris amet cupidatat ad ea exercitation veniam aliqua esse adipisicing. Culpa commodo cillum anim eiusmod sunt eiusmod velit ut enim nisi nostrud laboris exercitation. Pariatur cillum irure pariatur nisi laboris ex eiusmod reprehenderit minim. Ullamco cillum consectetur sint dolor proident sint irure ad cillum culpa commodo ut. Eiusmod velit sunt dolore non velit laborum consequat cupidatat mollit."
+      //     }
+      //   }
+      // ]
+      let user = JSON.parse(localStorage.getItem('PetMe_user'))
+      renderWishlist(user.wishes)
+    })
+  </script>
+</body>
+</html>

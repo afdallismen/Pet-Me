@@ -6,6 +6,6 @@ const { authenticate } = require('../middlewares/auth')
 routes.use('/', authenticate)
 
 routes.put('/', UserController.addWish)
-routes.delete('/', UserController.removeWish)
+routes.delete('/:pet_id', UserController.removeWish)
 
 module.exports = routes

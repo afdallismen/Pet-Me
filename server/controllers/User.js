@@ -10,7 +10,7 @@ class User {
   }
 
   static removeWish (req, res) {
-    req.user.wishes.pull(req.body.pet_id)
+    req.user.wishes.pull(req.params.pet_id)
     req.user
       .save()
       .then(user => res.status(200).json({ user }))
