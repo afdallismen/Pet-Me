@@ -10,6 +10,7 @@ let baseURL = "https://api.petfinder.com/v2"
 class Animals{
     
     static getAll(req, res){
+        console.log('test')
         let query = (req.query)
         let qs = querystring.stringify(query)
         let url = `${baseURL}/animals?${qs}`

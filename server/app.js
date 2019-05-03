@@ -36,6 +36,6 @@ app.listen(PORT, () => {
       process.env.ACCESS_TOKEN = token.data.access_token
       console.log(process.env.ACCESS_TOKEN)
   }).catch(err => {
-      res.status(500).json(err)
+      console.log(err)
   })
 })
