@@ -177,17 +177,35 @@
 ```
 
 
+
 #### Get All Animals
 
 **Method**: `POST`
 
 **URL**: `/animals`
+=======
+#### GETTING TRIVIA FROM WIKI
+
+<hr>
+
+**search top 3 from wikipedia based on the searchString**
+
+**Method**: `GET`
+
+**URL**: `/details/:searchString`
+
+**Request Body**:
+```javascript
+none
+```
+
 
 **Response Success**
 
 **Status**: `200`
 
 **Body**:
+
 ```json
 {
     "animals": [
@@ -275,6 +293,14 @@
         "total_pages": 16,
         "_links": {}
     }
+}
+
+
+```javascript
+{
+    title: STRING
+    pageid: NUMBER
+    text: STRING 
 }
 
 ```

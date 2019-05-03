@@ -8,6 +8,7 @@ function hideLogin() {
     $('.register-modal-button').hide()
     $('.login-modal-button').hide()
     $('.sign-out').show()
+    $('.wishes-link').show()
 }
 
 function showLogin() {
@@ -28,7 +29,7 @@ function saveLogin (data) {
 
     let email = $('#login-email').val()
     let password = $('#login-password').val()
-    
+
     axios
       .post('http://localhost:3000/auth/login', {
         email,
@@ -41,7 +42,7 @@ function saveLogin (data) {
           type: 'success',
           title: 'Login success',
           text: 'Welcome to pet me!',
-          timer: 1500 
+          timer: 1500
         })
         hideLogin()
         $('#loginModal').modal('hide')
@@ -69,15 +70,40 @@ function saveLogin (data) {
   }
 
   function handleClickLogout () {
-    let auth2 = gapi.auth2.getAuthInstance()
 
-    auth2.signOut().then(function () {
-      console.log('signed-out')
-      localStorage.removeItem('PetMe_user')
-      localStorage.removeItem('PetMe_token')
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to add wish lists!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then((result) => {
+      if (result.value) {
+        
+        let auth2 = gapi.auth2.getAuthInstance()
 
-      showLogin()
+        auth2.signOut().then(function () {
+          console.log('signed-out')
+          localStorage.removeItem('PetMe_user')
+          localStorage.removeItem('PetMe_token')
+
+          showLogin()
+
+          Swal.fire(
+            'Logged out!',
+            'See you again.',
+            'success'
+          )
+        })
+
+        
+      }
     })
+
+
+    
   }
 
   function handleSubmitRegister(e) {

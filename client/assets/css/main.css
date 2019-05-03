@@ -55,6 +55,11 @@
     overflow: hidden;
 }
 
+.cardview-detail {
+    overflow:hidden;
+    height: 16px;
+}
+
 .paw-button {
 }
 

@@ -4,7 +4,7 @@ class User {
     req.user
       .save()
       .then(user => {
-        req.status(200).json({ user })
+        res.status(200).json({ user })
       })
       .catch(() => res.status(500).json({ message: 'Internal Server Error' }))
   }
@@ -18,4 +18,4 @@ class User {
   }
 }
 
-module.exports
+module.exports = User
