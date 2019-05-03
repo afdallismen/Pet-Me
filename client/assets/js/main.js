@@ -88,9 +88,21 @@ function getPetDetail(id) {
         $('.detail-image').attr('src', details.photos[0].medium)
 
         $('.detail-about').empty()
+        $('#static-map-container').empty()
+        $('#addr').empty()
         $('.detail-about').append('Contact: ' + details.contact.email + '<br>')
         $('.detail-about').append('Phone: ' + details.contact.phone + '<br>')
-        $('.detail-about').append('Address: ' + details.contact.address + '<br>')
+        $('#static-map-container').append(
+            `<div class="row">
+                <div class="span4"></div>
+                <div class="span4"><img src="https://maps.googleapis.com/maps/api/staticmap?center=${details.contact.address.address1}&zoom=12&size=600x300&markers=color:red%7Clabel:%7C${details.contact.address.address1}&maptype=hybrid&key=AIzaSyBvszf7pWDZ7MA-umkI-U7EEAj8jTYTLDQ">
+                <div class="span4"></div>
+            </div>
+        `)
+        $('#addr').append(
+            `<h5>Address</h5>
+            <p>${details.contact.address.address1}</p>
+        `)
     })
     .fail((jqXHR, textStatus) => {
         console.log(jqXHR)
