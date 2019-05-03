@@ -12,4 +12,5 @@ const randomNumber = () => {
   return Array.from(Array(5), el => Math.floor(Math.random() * 10)).join('')
 }
 
+
 module.exports = { createToken, randomNumber }
