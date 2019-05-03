@@ -1,5 +1,9 @@
 $(document).ready(function() {
     getAnimalData()
+    if(localStorage.PetMe_token) {
+        hideLogin()
+    } else showLogin()
+    closeDetail()
 })
 
 function getAnimalData() {
@@ -77,6 +81,8 @@ function getPetDetail(id) {
     .done(response => {
         let details = response.animal
 
+        openDetail()
+
         $('.detail-name').text(`${details.name}`)
         $('.detail-description').text(`${details.age} . ${details.gender} . ${details.size}`)
         $('.detail-image').attr('src', details.photos[0].medium)
@@ -91,12 +97,14 @@ function getPetDetail(id) {
     })
 }
 function sendRequestPost(query) {
+    console.log(query)
     $.ajax({
         url: 'http://localhost:3000/animals',
-        method: 'POST',
+        method: 'GET',
         data: query
     })
     .done(response => {
+        console.log(response)
         $('.cardview-container').empty()
         showAnimalData(response)
     })
@@ -109,7 +117,8 @@ function searchByBreed(){
     // console.log('haha')
     // console.log($('#search-input').val())
     // console.log($('.search-breed').val())
-    sendReuqestPost({breed: $('.search-breed').val()})
+    closeDetail()
+    sendRequestPost({breed: $('.search-breed').val()})
 }
 
 function advanceSearchPet() {
@@ -118,14 +127,24 @@ function advanceSearchPet() {
     // console.log($('.search-type').val())
     // console.log($('.search-gender').val())
     // console.log($('.search-size').val())
-
+    closeDetail()
     let query = {}
     if($('.search-breed').val() !== "") query.breed = $('.search-breed').val()
     if($('.search-type').val() !== "") query.type = $('.search-type').val()
     if($('.search-gender').val() !== "") query.gender = $('.search-gender').val()
     if($('.search-size').val() !== "") query.size = $('.search-size').val()
 
-    sendReuqestPost(query)
+    sendRequestPost(query)
+}
+
+function openDetail() {
+    $('.cardview-container').hide()
+    $('.detail-container').show()
+}
+
+function closeDetail() {
+    $('.cardview-container').show()
+    $('.detail-container').hide()
 }
 
 // const data = {

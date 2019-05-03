@@ -25,7 +25,7 @@
     <div id="app">
         <!-- YOUR CODE HERE -->
         <!-- navbar -->
-        <div class="container px-0">
+        <div class="container-fluid px-0" style="background-color:#007bff;">
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <a class="navbar-brand" href="#"><i class="fas fa-paw"></i> Pet Me</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -170,8 +170,8 @@
             <div class="container search-container">
                 <div class="row search-bar flex">
                     <div class="input-group mb-3 col-8 ">
-                        <input type="text" class="form-control search-breed" placeholder="Search by breed" aria-label="Search a pet"
-                            aria-describedby="basic-addon2" id="search-input">
+                        <input type="text" class="form-control search-breed" placeholder="Search by breed"
+                            aria-label="Search a pet" aria-describedby="basic-addon2" id="search-input">
                         <div class="input-group-append">
                             <a href="#" onclick="searchByBreed()"><span class="input-group-text"
                                     id="basic-addon2">Search</span></a>
@@ -228,10 +228,10 @@
                                         <span class="input-group-text" id="basic-addon1">Gender</span>
                                     </div>
                                     <select class="custom-select form-control search-gender">
-                                            <option selected>Select pet gender:</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
+                                        <option selected>Select pet gender:</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col">
@@ -240,11 +240,11 @@
                                         <span class="input-group-text" id="basic-addon1">Breed</span>
                                     </div>
                                     <select class="custom-select form-control search-size">
-                                            <option selected>Select size:</option>
-                                            <option value="small">Small</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
-                                        </select>
+                                        <option selected>Select size:</option>
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="large">Large</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -289,65 +289,82 @@
             </div>
         </div>
 
-        <div class="container px-0">
-            <a href="#">Back</a>
-        </div>
+        <div class="detail-container">
+            <div class="container px-0 back-button">
+                <a href="#" onclick="closeDetail()">Back</a>
+            </div>
 
-        <!-- <div class="container jumbo-img px-0">
-      <img src="https://mk0rudomarimi8jkk6sh.kinstacdn.com/wp-content/uploads/img-pet-camera.jpg" style="width:100%;" alt="">
-  </div> -->
+            <!-- <div class="container jumbo-img px-0">
+                  <img src="https://mk0rudomarimi8jkk6sh.kinstacdn.com/wp-content/uploads/img-pet-camera.jpg" style="width:100%;" alt="">
+              </div> -->
 
-        <div class="container border">
-            <div class="row">
-                <div class="col-7 border">
-                    <div class="container-fluid p-2">
-                        <div class="col">
-                            <div class="row">
-                                <h1>Pet Information</h1>
-                            </div>
-                            <div class="row detail-name">
-                                <h1>Pet Name</h1>
-                            </div>
+            <div class="container border">
+                <div class="row">
+                    <div class="col-7 border">
+                        <div class="container-fluid p-2">
+                            <div class="col">
+                                <div class="row">
+                                    <h1>Pet Information</h1>
+                                </div>
+                                <div class="row detail-name">
+                                    <h1>Pet Name</h1>
+                                </div>
 
-                            <!-- horizontal divider -->
-                            <hr>
-                            <div class="row detail-description">
-                                Pet Desc went here
-                            </div>
-                            <!-- horizontal divider -->
-                            <hr>
-                            <div class="row detail-about">
+                                <!-- horizontal divider -->
+                                <hr>
+                                <div class="row detail-description">
+                                    Pet Desc went here
+                                </div>
+                                <!-- horizontal divider -->
+                                <hr>
+                                <div class="row detail-about">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-5 border">
-                    <div class="container-fluid">
-                        <div class="row flex center detail-image-container">
+                    <div class="col-5 border">
+                        <div class="container-fluid">
+                            <div class="row flex center detail-image-container">
 
-                            <img src="https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44594627/2/?bust=1556804470&width=300"
-                                alt="" class=" detail-image">
+                                <img src="https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/44594627/2/?bust=1556804470&width=300"
+                                    alt="" class=" detail-image">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- for wiki -->
-        <div class="container border">
-            <div class="row">
-                for wiki
+            <!-- for wiki -->
+            <div class="container border">
+                <div class="row">
+                    for wiki
+                </div>
             </div>
         </div>
 
 
         <!-- footer -->
-        <div class="container border">
-            <div class="row">
-                Contact Us
+        <div class="container-fluid border" style="background-color:#007bff">
+            <div class="container">
+                    <div class="row" style="color:white;">
+                            Address:
+                            Keas 69 Str.
+                            15234, Chalandri
+                            Athens,
+                            Greece
+                            
+                            
+                    </div>
+                    <div class="row" style="color:white;">
+                            +30-2106019311 (landline)
+                            +30-6977664062 (mobile phone)
+                            +30-2106398905 (fax)
+                    </div>
+
             </div>
-        </div>
+
+            </div>
     </div>
 
 
