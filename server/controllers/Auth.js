@@ -28,8 +28,10 @@ class Auth {
     UserModel
       .findOne({ email: req.body.email })
       .then(user => {
+        // console.log(user)
         if (user && user.comparePassword(req.body.password)) {
           let token = createToken(user)
+          // console.log(token)
           res.status(201).json({
             user: {
               _id: user._id,
@@ -40,23 +42,29 @@ class Auth {
             token
           })
         } else {
+          // console.log('masuk else')
           res.status(400).json({ message: 'Invalid email or password' })
         }
       })
-      .catch(() => res.status(500).json({ message: 'Internal Server Error' }))
+      .catch((err) =>{ 
+        // console.log(err)
+        res.status(500).json({ message: 'Internal Server Error' })})
   }
 
   static googleSignin (req, res) {
     let token = req.body.token
-
+    console.log(process.env.GOOGLE_CLIENT_ID)
     const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-
+    // console.log('masuk sini')
+    // console.log(client)
+    // console.log(req.body.token)
     client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID
     })
       .then(ticket => {
         const { email, name } = ticket.getPayload()
+        console.log(ticket)
 
         return UserModel
           .findOne({ email })
@@ -84,7 +92,9 @@ class Auth {
           token: jwt_token
         })
       })
-      .catch(() => res.status(500).json({ message: 'Internal Server Error' }))
+      .catch((err) => {
+        console.log(err)
+        res.status(500).json({ message: 'Internal Server Error' })})
   }
 }
 
