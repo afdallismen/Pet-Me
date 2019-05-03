@@ -12,6 +12,10 @@ const PORT = 3000
 
 mongoose.connect('mongodb://localhost:27017/petme', { useNewUrlParser: true })
 
+const app = express()
+const PORT = 4444
+// mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+app.use(require('volleyball'))
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
