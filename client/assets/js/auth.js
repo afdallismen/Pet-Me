@@ -8,6 +8,7 @@ function hideLogin() {
     $('.register-modal-button').hide()
     $('.login-modal-button').hide()
     $('.sign-out').show()
+    $('.wishes-link').show()
 }
 
 function showLogin() {
@@ -28,7 +29,7 @@ function saveLogin (data) {
 
     let email = $('#login-email').val()
     let password = $('#login-password').val()
-    
+
     axios
       .post('http://localhost:3000/auth/login', {
         email,
@@ -41,7 +42,7 @@ function saveLogin (data) {
           type: 'success',
           title: 'Login success',
           text: 'Welcome to pet me!',
-          timer: 1500 
+          timer: 1500
         })
         hideLogin()
         $('#loginModal').modal('hide')
