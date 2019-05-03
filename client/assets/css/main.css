@@ -15,15 +15,18 @@
 .search-bar {
     display:flex;
     justify-content: center;
+    align-self:flex-end;
 }
 
 .cardview {
     height: 300px;
     width: 200px;
     max-height: 300px;
-    widtH: 200px;
-    margin: 5px;
+    max-width: 200px;
+    margin-left: 24px;
+    margin-bottom: 10px;
 }
+
 
 .cardview-container {
     display:flex;
@@ -33,6 +36,7 @@
 
 .cardview-image {
     max-height: 190px;
+    height: 190px;
     border-radius: 50%;
     overflow:hidden;
     /* padding:5px; */
@@ -40,12 +44,15 @@
 
 .cardview-image img {
     width: 100%;
+    height: 100%;
     overflow:hidden;
 
 }
 
 .cardview-name {
     font-size: 30px;
+    max-height: 45px;
+    overflow: hidden;
 }
 
 .paw-button {
@@ -76,4 +83,20 @@
 
 .detail-name {
     font-size: 30px;
+}
+
+.overflow-hidden {
+    overflow:hidden;
+}
+
+.search-bar {
+    margin-top: 240px;
+}
+
+.sign-out {
+    color: white;
+}
+
+.sign-out:hover {
+    color: yellow;
 }
