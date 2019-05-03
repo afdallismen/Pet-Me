@@ -16,7 +16,8 @@ class Auth {
           user: {
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            wishes: user.wishes
           }
         })
       })
@@ -33,7 +34,8 @@ class Auth {
             user: {
               _id: user._id,
               name: user.name,
-              email: user.email
+              email: user.email,
+              wishes: user.wishes
             },
             token
           })
@@ -76,7 +78,8 @@ class Auth {
           user: {
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            wishes: user.wishes
           },
           token: jwt_token
         })
