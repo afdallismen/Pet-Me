@@ -175,3 +175,42 @@
     message: "Internal Server Error"
 }
 ```
+
+#### GETTING TRIVIA FROM WIKI
+
+<hr>
+
+**search top 3 from wikipedia based on the searchString**
+
+**Method**: `GET`
+
+**URL**: `/details/:searchString`
+
+**Request Body**:
+```javascript
+none
+```
+
+**Response Success**
+
+**Status**: `200`
+
+**Body**:
+```javascript
+{
+    title: STRING
+    pageid: NUMBER
+    text: STRING 
+}
+```
+
+**Response Failure**
+
+**Status**: `500`
+
+**Body**:
+```javascript
+{
+    message: "Internal Server Error"
+}
+```
